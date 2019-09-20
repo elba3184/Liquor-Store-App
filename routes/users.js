@@ -11,29 +11,31 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
+  let admin = false;
 
-  console.log(`hits the post router`)
+  console.log('------------', admin)
+  console.log(req.body)
 
-   
-    let admin = false;
-
-    if(req.user) {
-      console.log('req.user is called')
-      if (req.user.isAdmin) {
-        console.log("===.,.,./", req.body.username);
-        console.log("dsfsnjfasdkfnasf", req.body.password);
-        console.log("asdfsadfas", req.body.role);
-        admin = req.body.role ? false : true
+  if(req.user){
+      // here we check if someone is logged in 
+      if(req.user.isAdmin){
+          // and if someone if logged in we check if theyre an admin and if so we change the value of the variable to true
+          admin = req.body.role? req.body.role : false
+          // this is the same as 
+          // if(req.body.role){
+          //     admin= req.body.role
+          // }
+          // else{
+          //     admin = false
+          // }
       }
-    }
-
+  }
     
     let username = req.body.username;
     let password = req.body.password;
     
     const salt  = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-
+    const hash  = bcrypt.hashSync(password, salt);
     
     User.create({
       username: username,
@@ -58,15 +60,10 @@ router.get('/login', (req, res, next) => {
 router.post("/login", passport.authenticate("local", {
 
   successRedirect: "/",
-  failureRedirect: "/login",
+  failureRedirect: "/users/login",
   failureFlash: true,
   passReqToCallback: true
 }));
-
-// router.post('/logout', (req, res, next)=> {
-//   req.logout();
-//   res.redirect('/');
-// })
 
 router.get('/logout', (req, res, next) => {
 

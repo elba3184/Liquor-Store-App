@@ -86,14 +86,12 @@ passport.deserializeUser((id, cb) => {
 passport.use(new LocalStrategy((username, password, next) => {
 
   User.findOne({ username }, (err, user) => {
-    // in this callbacksyntax err will only exist if something goes wrong
-    // user will only exist if everything goes right
+  
     if (err) {
       return next(err);
     }
     if (!user) {
       return next(null, false, { message: "Sorry, wrong username" });
-      // whatever message is equal to automatically gets set to req.flash('error')
     }
     if (!bcrypt.compareSync(password, user.password)) {
       return next(null, false, { message: "Incorrect password" });
@@ -126,5 +124,8 @@ app.use('/users', users);
 
 const admin = require('./routes/admin');
 app.use('/admin', admin);
+
+const vendors = require('./routes/vendors');
+app.use('/vendors', vendors);
 
 module.exports = app;

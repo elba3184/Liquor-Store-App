@@ -1,24 +1,43 @@
 <h2>Welcome to the index of Liquor</h2>
 <ul>
-{{#each movies}}
-  <li>{{title}}</li>
-  <li>{{genre}}</li>
-  <li>{{plot}}</li>
-  <li>{{star}}</li>
+{{#each liquor}}
+  <li>{{brand}}</li>
+  <li>{{description}}</li>
+  <li>{{type}}</li>
+  <li>{{size}}</li>
+  {{!-- <li>{{size}}</li> --}}
 
-  <a href="/show-movie/{{_id}}">Read more about this movie</a>
+  <a href="show/{{_id}}">Read more about this item</a>
 
 {{#if theUser}}
-<form action="/delete-movie/{{_id}}" method="POST">
-    <button>Delete this movie</button>
+<form action="/delete-item/{{_id}}" method="POST">
+    <button>Delete this item</button>
 </form>
 
-<a href="/edit-movie/{{_id}}">Edit This movie's Info</a>
+<a href="/edit-item/{{_id}}">Edit This item's Info</a>
   <br>
   {{/if}}
 {{/each}}
 </ul>
 
 {{#if theUser}}
- <a href="/new-movie">Create a new movie</a>
+ <a href="/new-item">Create a new movie</a>
  {{/if}}
+
+
+ {{!-- <section>
+  <h2>Upload your photo</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="photo">
+    <input type="submit" value="Save">
+  </form>
+</section>
+
+
+<section>
+  {{#each pictures}}
+    <h3>{{ this.name }}</h3>
+    <img src="{{ this.path }}" alt="{{ this.originalName }}" />
+  {{/each}}
+</section> --}}

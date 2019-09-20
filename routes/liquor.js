@@ -18,10 +18,9 @@ router.get('/index', (req, res, next)=>{
 router.get('/show/:id', (req, res, next)=>{
 
   let id = req.params.id;
-  Liquor.findById(id)
-  // .populate('vendors')
-  .then(something =>{
-      res.render('liquor/show', {something})
+  Liquor.findById(id).populate('vendors')
+  .then(item =>{
+      res.render('liquor/show', {liquor: item})
   })
   .catch((err)=>{
       next(err);
@@ -41,23 +40,23 @@ router.post('/created-item', (req, res, next)=>{
   let type = req.body.type;
   let description = req.body.description;
   let size = req.body.size;
-  // let vendor = req.body.vendor;
+  let vendor = req.body.vendor;
 
   Liquor.create({
 
       brand: brand,
       type: type,
       description: description,
-      size: size
-      // vendor: vendor
+      size: size,
+      vendor: vendor
   })
 
   .then(result =>{
-    // Vendor.find()
-    // .then(allVendors => {
-    //   const data = {liquor: result, vendor: allVendors}
+    Vendor.find()
+    .then(allVendors => {
+      const data = {liquor: result, vendor: allVendors}
       res.redirect('liquor/index', {result}) //should change to data
-    // })
+    })
   })
   .catch(err =>{
     next(err);
@@ -85,18 +84,19 @@ router.get('/edit-item/:id', (req, res, next)=>{
 
   let id = req.params.id;
 
-  Liquor.findById(id)
-  // .populate('vendors')
+  Liquor.findById(id).populate('vendors')
   .then(liquor =>{
     console.log('===>', liquor)
-  // Vendor.find()
-  // .then(allVendors => {
+  Vendor.find()
+  .then(allVendors => {
     const data = {
-      liquor: liquor
-      // vendors: allVendors
+      liquor: liquor,
+      vendors: allVendors
     }  
+    console.log("=lsdfsdfs vendors 3",vendors);
+    
     res.render('liquor/edit', {data});
-  //  })
+   })
   })
   .catch(err=>{
       next(err)
@@ -112,8 +112,8 @@ router.post('/update-item/:id', (req, res, next)=>{
       brand: req.body.brand,
       type: req.body.type,
       description: req.body.description,
-      size: req.body.size
-      // vendor: req.body.vendor
+      size: req.body.size,
+      vendor: req.body.vendor
   })
   .then(result=>{
       res.redirect('liquor/show/'+id)

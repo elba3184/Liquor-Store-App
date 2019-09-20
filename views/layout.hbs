@@ -18,11 +18,11 @@
       <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/liquor/index">Liquor</a></li>
-          <li><a href="/liquor/show">Vendors</a></li>
+          <li><a href="/vendors/index">Vendors</a></li>
 
-        {{#if theUser.isAdmin}}
-          <a href="/create-new-account">Create New User</a>
-          <a href="/active-users">See All Users</a>
+        {{#if theUser}}
+          <a href="/users/create-new-account">Create New User</a>
+          <a href="/users/active-users">See All Users</a>
         {{/if}} 
         
       </ul>

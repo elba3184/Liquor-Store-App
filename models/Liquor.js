@@ -5,7 +5,7 @@ const liquorSchema = new Schema ({
 
     brand: String,
     type: String,
-    // vendor: {type: Schema.Types.ObjectId, ref: 'User'},
+    vendor: {type: Schema.Types.ObjectId, ref: 'Vendor'},
     description: String,
     size: String,
     quantity: Number, // if 0, conditionally render out of stock

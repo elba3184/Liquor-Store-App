@@ -7,8 +7,8 @@ router.use((req, res, next)=>{
     if(!req.user){
         // req.flash('error', 'Please login to have acess to this feature.')
         res.redirect('/users/login')
-    }
-    if(!req.user.isAdmin){
+    // }
+    // if(!req.user.isAdmin){
         // req.flash('error', 'Sorry, you do not have access to this feature. Create an account or log in.')
         res.redirect('/')
     }

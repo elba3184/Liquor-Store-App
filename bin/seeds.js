@@ -1,5 +1,15 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const Liquor   = require('../models/Liquor')
+
+mongoose
+  .connect(`${process.env.MONGODB_URI}`, {useNewUrlParser: true})
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  })
+  .catch(err => {
+    console.error('Error connecting to mongo', err)
+  });
 
 let liquor = [
  {
@@ -3346,8 +3356,8 @@ Liquor.create(liquor, err => {
     console.log(err)
     // throw err
   }
-  // console.log("Seeding successful!")
-  // mongoose.connection.close()
+  console.log("Seeding successful!")
+  mongoose.connection.close()
 });
 
 module.exports = liquor;
