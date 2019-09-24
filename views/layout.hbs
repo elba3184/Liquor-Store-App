@@ -17,16 +17,14 @@
     <nav class="nav-left">
       <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="liquor/index">Liquor</a></li>
-          <li><a href="/">Vendors</a></li>
+          <li><a href="/liquor/index">Liquor</a></li>
+          <li><a href="/liquor/show">Vendors</a></li>
 
-        {{!-- {{#if theUser.isAdmin}}
+        {{#if theUser.isAdmin}}
           <a href="/create-new-account">Create New User</a>
           <a href="/active-users">See All Users</a>
-        {{/if}} --}}
-          {{!-- {{#if theUser}}
-            <li><a href="/movie-index">Favorite Movies</a></li>
-          {{/if}} --}}
+        {{/if}} 
+        
       </ul>
     </nav>
 
@@ -34,10 +32,10 @@
       <ul>
 
         {{#if theUser}}
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/users/logout">Logout</a></li>
           {{else}}
-          <li><a href="/signup">Sign up</a></li>
-          <li><a href="/login">Login</a></li>
+          <li><a href="/users/signup">Sign up</a></li>
+          <li><a href="/users/login">Login</a></li>
         {{/if}}
     
       </ul>

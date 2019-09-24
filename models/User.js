@@ -5,6 +5,7 @@ const userSchema = new Schema ({
 
     username: String,
     password: String,
+    isAdmin: Boolean,
     email: String,
     role: {type: String, enum: ["Administrator", "Employee", "Vendor", "Customer"]},
     // cart: {type: Schema.Type.ObjectId, ref: "Cart"} // maybe

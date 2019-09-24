@@ -11,27 +11,37 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
+
+  console.log(`hits the post router`)
+
    
     let admin = false;
+
     if(req.user) {
+      console.log('req.user is called')
       if (req.user.isAdmin) {
-        admin = req.body.role ? req.user.role : false
+        console.log("===.,.,./", req.body.username);
+        console.log("dsfsnjfasdkfnasf", req.body.password);
+        console.log("asdfsadfas", req.body.role);
+        admin = req.body.role ? false : true
       }
     }
-  
+
+    
     let username = req.body.username;
     let password = req.body.password;
-
+    
     const salt  = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
+    
     User.create({
-        username: username,
-        password: hash,
-        isAdmin: admin
+      username: username,
+      password: hash,
+      isAdmin: admin
     })
     .then(()=>{
-        res.redirect('/login')
+        res.redirect('/users/login')
     })
     .catch((err)=>{
         next(err)
@@ -46,6 +56,7 @@ router.get('/login', (req, res, next) => {
 
 
 router.post("/login", passport.authenticate("local", {
+
   successRedirect: "/",
   failureRedirect: "/login",
   failureFlash: true,

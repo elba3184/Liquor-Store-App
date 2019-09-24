@@ -1,6 +1,5 @@
 const express   = require('express');
 const router    = express.Router();
-
 const Liquor     = require('../models/Liquor');
 
 router.get('/index', (req, res, next)=>{
@@ -16,18 +15,19 @@ router.get('/index', (req, res, next)=>{
 });
 
 //Populate vendors
-// router.get('/show/:id', (req, res, next)=>{
+router.get('/show/:id', (req, res, next)=>{
 
-//   let id = req.params.id;
-//   Liquor.findById(id).populate('vendors')
-//   .then(something =>{
-//       res.render('liquor/show', {something})
-//   })
-//   .catch((err)=>{
-//       next(err);
-//   })
+  let id = req.params.id;
+  Liquor.findById(id)
+  // .populate('vendors')
+  .then(something =>{
+      res.render('liquor/show', {something})
+  })
+  .catch((err)=>{
+      next(err);
+  })
 
-// });
+});
 
 router.get('/new-item', (req, res, next)=>{
 
