@@ -1,0 +1,37 @@
+
+<h2>Edit {{data.liquor.brand}}</h2>
+
+
+<form action="/update-item/{{data.liquor._id}}" method="POST">
+
+
+<p>Brand</p>
+
+<input type="text" name="title" value=" {{data.liquor.brand}}">
+
+
+<p>Description</p>
+<input type="text" name="genre" value="{{data.liquor.description}}">
+
+
+<p>Size</p>
+<input type="text" name="plot" value="{{data.liquor.size}}">
+
+<p>Type</p>
+<input type="text" name="plot" value="{{data.liquor.type}}">
+
+{{!-- <p>Vendors</p>
+<select name="vendor">
+
+  {{#each data.vendor}}
+  
+  <option selected value="{{_id}}">{{name}}</option>
+  {{else}}
+     <option value="{{_id}}">{{name}}</option>
+
+  {{/each}}
+</select> --}}
+
+<button>Save</button>
+
+</form>
