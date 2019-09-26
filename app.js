@@ -103,8 +103,11 @@ passport.use(new LocalStrategy((username, password, next) => {
 
 
 app.use((req, res, next)=>{
-  res.locals.theUser = req.user;
+  
+  app.locals.currentUser = req.user;
   res.locals.admin = req.admin; 
+  res.locals.employee = req.employee;
+  res.locals.vendors = req.vendors;
   res.locals.sucessMessage = req.flash('success');
   res.locals.errorMessage = req.flash('error');
 
@@ -118,14 +121,13 @@ app.use('/', index);
 const liquor = require('./routes/liquor');
 app.use('/liquor', liquor);
 
+const vendors = require('./routes/vendors');
+app.use('/vendors', vendors);
 
 const users = require('./routes/users');
 app.use('/users', users);
 
 const admin = require('./routes/admin');
 app.use('/admin', admin);
-
-const vendors = require('./routes/vendors');
-app.use('/vendors', vendors);
 
 module.exports = app;

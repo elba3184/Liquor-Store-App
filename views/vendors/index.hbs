@@ -1,1 +1,24 @@
-<h2>In Vendor Index</h2>
+<h2>Welcome to the Vendor Index</h2>
+<ul>
+{{#each vendors}}
+  <li>{{companyName}}</li>
+  <li>{{location}}</li>
+  <li>{{products}}</li>
+  {{!-- {{#each products}}
+  <li>{{products.brand}}</li>
+{{/each}} --}}
+
+  <a href="show/{{_id}}">Read more about this vendor</a>
+
+
+<form action="/delete-vendor/{{_id}}" method="POST">
+    <button>Delete this item</button>
+</form>
+
+<a href="edit-vendor/{{_id}}">Edit this vendor's Info</a>
+  <br>
+ 
+{{/each}}
+</ul>
+
+ <a href="/vendors/new-vendor">Create a new vendor</a>

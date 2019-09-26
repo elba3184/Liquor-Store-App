@@ -1,29 +1,29 @@
-<h2>Add a new movie!</h2>
+<h2>Add a new item!</h2>
 
-<form action="/created-movie" method="POST">
+<form action="/liquor/created-item" method="POST">
 
-<p>Title</p>
-<input type="text" name="title">
-
-
-<p>Genre</p>
-<input type="text" name="genre">
+<p>Brand</p>
+<input type="text" name="brand">
 
 
-<p>Plot</p>
-<input type="text" name="plot">
+<p>Type</p>
+<input type="text" name="type">
 
-<p>Stars</p>
-{{#each data.stars}}
+
+<p>Description</p>
+<input type="text" name="description">
+
+<p>Vendor</p>
+{{#each data.vendors}}
   
-  <option selected value="{{_id}}">{{name}}</option>
+  <option selected value="{{_id}}">{{companyName}}</option>
   {{else}}
-     <option value="{{_id}}">{{name}}</option>
+     <option value="{{_id}}">{{companyName}}</option>
 
   {{/each}}
 
-<p>Image</p>
-<input type="text" name="image">
+{{!-- <p>Image</p>
+<input type="text" name="image"> --}}
 
 <button>Save</button>
 

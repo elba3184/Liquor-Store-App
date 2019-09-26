@@ -1,28 +1,27 @@
-<h2>Welcome to the index of Liquor</h2>
+<h2>Welcome to the Liquor Index</h2>
 <ul>
 {{#each liquor}}
   <li>{{brand}}</li>
   <li>{{description}}</li>
   <li>{{type}}</li>
   <li>{{size}}</li>
-  {{!-- <li>{{size}}</li> --}}
+  <li>{{vendor.companyName}}</li>
 
-  <a href="show/{{_id}}">Read more about this item</a>
+  <a href="show/{{barcode}}">Read more about this item</a>
 
-{{#if theUser}}
-<form action="/delete-item/{{_id}}" method="POST">
+
+<form action="delete-item/{{_id}}" method="POST">
     <button>Delete this item</button>
 </form>
 
-<a href="/edit-item/{{_id}}">Edit This item's Info</a>
+<a href="edit-item/{{_id}}">Edit This item's Info</a>
   <br>
-  {{/if}}
+ <a href="/liquor/new-item">Create a new item</a>
 {{/each}}
 </ul>
 
-{{#if theUser}}
- <a href="/new-item">Create a new movie</a>
- {{/if}}
+ {{!-- <a href="/new-item">Create a new item</a> --}}
+
 
 
  {{!-- <section>

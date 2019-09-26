@@ -1,1 +1,11 @@
 <h2>In Vendor Show</h2>
+<ul>
+{{#each vendors}}
+  <li>{{companyName}}</li>
+  <li>{{location}}</li>
+  <li>{{products.companyName}}</li>
+  <a href="/vendors/show/{{products._id}}"><li>{{products.name}}</li></a>
+{{/each}}
+</ul>
+
+<a href="/vendors/index">Back to all vendors</a>

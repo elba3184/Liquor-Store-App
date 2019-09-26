@@ -1,36 +1,36 @@
 
-<h2>Edit {{data.liquor.brand}}</h2>
+<h2>Edit {{liquor.brand}}</h2>
 
 
-<form action="/update-item/{{data.liquor._id}}" method="POST">
+<form action="/liquor/update-item/{{liquor._id}}" method="POST">
 
 
 <p>Brand</p>
 
-<input type="text" name="title" value=" {{data.liquor.brand}}">
+<input type="text" name="brand" value=" {{liquor.brand}}">
 
 
 <p>Description</p>
-<input type="text" name="genre" value="{{data.liquor.description}}">
+<input type="text" name="description" value="{{liquor.description}}">
 
 
 <p>Size</p>
-<input type="text" name="plot" value="{{data.liquor.size}}">
+<input type="text" name="size" value="{{liquor.size}}">
 
 <p>Type</p>
-<input type="text" name="plot" value="{{data.liquor.type}}">
+<input type="text" name="type" value="{{liquor.type}}">
 
-{{!-- <p>Vendors</p>
+<p>Vendors</p>
 <select name="vendor">
 
-  {{#each data.vendor}}
-  
-  <option selected value="{{_id}}">{{name}}</option>
+  {{#each vendors}}
+  {{#if isTheVendor}}
+  <option selected value="{{_id}}">{{companyName}}</option>
   {{else}}
-     <option value="{{_id}}">{{name}}</option>
-
+     <option value="{{_id}}">{{companyName}}</option>
+  {{/if}}
   {{/each}}
-</select> --}}
+</select>
 
 <button>Save</button>
 

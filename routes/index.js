@@ -1,16 +1,44 @@
 const express = require('express');
 const router  = express.Router();
-// const multer  = require('multer');
-// const Picture = require('../models/Picture');
-// const upload = multer({ dest: './public/uploads/' });
-// const Liquor = require('../models/Liquor');
-// const seedlist = require('../bin/seeds');
+const multer  = require('multer');
+const Picture = require('../models/Picture');
+const upload = multer({ dest: './public/uploads/' });
+const Liquor = require('../models/Liquor');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
 
+  // let isAdmin = false;
+  // let isVendor = false;
+  // let isEmployee = false;
+
+  // if (req.user.role == 'Administrator') {
+  //   console.log("This user is an admin")
+  //   isAdmin = true;
+  //   console.log(isAdmin)
+  // } else if (req.user.role == 'Vendor') {
+  //   console.log("This user is a vendor")
+  //   isVendor = true;
+  //   console.log(isVendor)
+  // } else if (req.user.role == 'Employee') {
+  //   console.log("This user is an employee")
+  //   isEmployee = true;
+  //   console.log(isEmployee)
+  // }
+  // {isAdmin, isEmployee, isVendor}
   res.render('index');
 });
+
+
+router.get('/findbybarcode/:barcode', (req, res, next)=>{
+  console.log(req.params.barcode)
+  Liquor.find({barcode: req.params.barcode})
+  .then(foundLiquor => {
+    console.log(foundLiquor)
+    // res.send(foundLiquor)
+    res.render('barcode', {foundLiquor})
+  })
+})
 
 // router.get('/', (req, res, next)=>{
 
