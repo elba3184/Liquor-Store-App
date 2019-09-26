@@ -8,10 +8,9 @@ router.get('/index', (req, res, next) => {
 
   Vendors.find()
     .then(vendors => {
-
-      // console.log('==>>_>_>_>_>___++++>>>>', vendors);
       res.render('vendors/index', {
-        vendors: vendors
+        vendors: vendors,
+        products: vendors.products,
       })
     })
     .catch(err => {
@@ -27,11 +26,9 @@ router.get('/show/:id', (req, res, next) => {
   console.log(id)
   Vendors.findById(id).populate('products')
     .then(theVendor => {
-      console.log(theVendor)
-      console.log('==>>_>_>_>_>___++++>>>>', theVendor.products);
-      // console.log(">>>>>the vendor<<<<<<", theVendor.products[0].brand)
       res.render('vendors/show', {
-        vendors: theVendor
+        vendors: theVendor,
+        products: theVendor.products
       })
     })
     .catch((err) => {
@@ -56,10 +53,6 @@ router.get('/liquor-vendors', async (req, res, next) => {
 
 router.post('/created-vendor', (req, res, next) => {
 
-
-
-  // Vendors.findById(id).populate('products')
-
   let name = req.body.name;
   let location = req.body.location;
   let products = req.body.products;
@@ -77,11 +70,7 @@ router.post('/created-vendor', (req, res, next) => {
             vendor: result,
             products: allLiquor
           }
-          // console.log('===VENDORS DATA====lfsdflsdfls===', data)
-          console.log("iddddd ,", products)
-          res.redirect('vendors/index', {
-            data
-          }) //should change to data
+          res.redirect('vendors/index', {data})
         })
     })
     .catch(err => {
@@ -97,15 +86,12 @@ router.post('/delete-vendor/:id', (req, res, next) => {
 
   Vendors.findById(id).populate('products')
     .then(vendors => {
-      console.log('Vendors in delete ===>', vendors)
       Liquor.find()
         .then(allLiquor => {
           const data = {
             vendors: vendors,
             liquor: allLiquor
           }
-          console.log("=lsdfsdfs liquor", data);
-
           res.render('vendors/edit', {
             data
           });

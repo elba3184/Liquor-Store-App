@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Liquor   = require('../models/Liquor');
-const Vendors   = require('../models/Vendor');
+const Vendor   = require('../models/Vendor');
 
 
 mongoose
@@ -54,7 +54,7 @@ let vendor = [
     }
 ]
 
-Vendors.create(vendor);
+Vendor.create(vendor);
 
 let liquor = [
     {
@@ -79,7 +79,7 @@ let liquor = [
       price: 28.99,
       cost: 22,
       quantity: 6,
-      vendor: id1
+      vendor: id2
     },
     {
       barcode: 8200019314,
@@ -91,7 +91,7 @@ let liquor = [
       price: 15.99,
       cost: 13.5,
       quantity: 4,
-      vendor: id1
+      vendor: id3
     },
     {
       barcode: 81153801022,
@@ -103,7 +103,7 @@ let liquor = [
       price: 27.99,
       cost: 22,
       quantity: 6,
-      vendor: id1
+      vendor: id4
     }
     // },
     // {
@@ -648,7 +648,21 @@ let liquor = [
     // }
   ]
 
-  Liquor.create(liquor);
+Liquor.create(liquor);
+
+setTimeout(() => {
+
+  throw "Errorrrrr"
+}, 4000)
+// Liquor.create(liquor => {
+//   Vendor.create(vendor=> {
+//     console.log("Seeding successful!");
+//     mongoose.connection.close();
+//   })
+// });
+
+// module.exports = liquor;
+// module.exports = vendor;
 
 
 // Liquor.create(liquor => {
@@ -656,7 +670,7 @@ let liquor = [
 //     console.log("This is the create method")
 
 //     console.log("Seeding successful!")
-    // mongoose.connection.close();
+    
 //   })
  
 // });

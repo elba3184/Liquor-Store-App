@@ -3,8 +3,10 @@
 {{#each vendors}}
   <li>{{companyName}}</li>
   <li>{{location}}</li>
-  <li>{{products.companyName}}</li>
-  <a href="/vendors/show/{{products._id}}"><li>{{products.name}}</li></a>
+  {{#each products}}
+  <li>{{brand}}</li>
+  <a href="/liquor/show/{{_id}}"><li>{{brand}}</li></a>
+  {{/each}}
 {{/each}}
 </ul>
 

@@ -1,63 +1,49 @@
-const express    = require('express');
-const router     = express.Router();
-const Liquor     = require('../models/Liquor');
-const Vendors     = require('../models/Vendor');
+const express = require('express');
+const router = express.Router();
+const Liquor = require('../models/Liquor');
+const Vendors = require('../models/Vendor');
 
+router.get('/index', (req, res, next) => {
 
- 
+  Liquor.find()
+    .populate("vendor")
+    .then(allLiquor => {
+      console.log("in index ---> All the liquor", allLiquor);
 
-router.get('/index', (req, res, next)=>{
-    
-   Liquor.find()
-  .populate("vendor")
-  .then(allLiquor=>{
-      console.log("in index ---> All the liquor",allLiquor);
-      
-      res.render('liquor/index', {liquor: allLiquor})
-  })
-  .catch(err =>{
+      res.render('liquor/index', {
+        liquor: allLiquor
+      })
+    })
+    .catch(err => {
       next(err);
-  })
+    })
 
 });
-
-//   res.render('liquor/index')
-
-// })
-
-// .catch((err)=>{
-// next(err);
-// });
-// });
-
-
-
-
-
-
 
 //Populate vendors
-router.get('/show/:barcode', (req, res, next)=>{
+router.get('/show/:id', (req, res, next) => {
 
-  let barcode = req.params.barcode;
-  Liquor.find({barcode: req.params.barcode}).populate('vendor')
-  .then(item =>{
-    console.log(item)
-      res.render('liquor/show', {liquor: item})
-  })
-  .catch((err)=>{
+  let id = req.params._id;
+  Liquor.find(id).populate('vendor')
+    .then(item => {
+      console.log(item)
+      res.render('liquor/show', {
+        liquor: item
+      })
+    })
+    .catch((err) => {
       next(err);
-  })
+    })
 
 });
 
-router.get('/new-item', (req, res, next)=>{
+router.get('/new-item', (req, res, next) => {
 
   res.render('liquor/new');
 
 });
 
-router.post('/created-item', (req, res, next)=>{
+router.post('/created-item', (req, res, next) => {
 
   let brand = req.body.brand;
   let type = req.body.type;
@@ -72,69 +58,64 @@ router.post('/created-item', (req, res, next)=>{
       description: description,
       size: size,
       vendor: vendor
-  })
-
-  .then(result =>{
-    Vendors.find()
-    .then(allVendors => {
-      console.log(allVendors)
-      // const data = {liquor: result, vendors: allVendors}
-      // console.log('=LIQUOR DATA===lfsdflsdfls===', data)
-      res.redirect('/liquor/index') //should change to data
     })
-  })
-  .catch(err =>{
-    next(err);
-  })
-  
+
+    .then(result => {
+      Vendors.find()
+        .then(allVendors => {
+          console.log(allVendors)
+          res.redirect('/liquor/index')
+        })
+    })
+    .catch(err => {
+      next(err);
+    })
+
 });
 
 
-router.post('/delete-item/:id', (req, res, next)=>{
+router.post('/delete-item/:id', (req, res, next) => {
 
   let id = req.params.id;
 
   Liquor.findByIdAndRemove(id)
-  .then(result=>{
+    .then(result => {
       res.redirect('/liquor/index')
-  })
-  .catch(err=>{
+    })
+    .catch(err => {
       next(err)
-  })
+    })
 
 });
 
 
-router.get('/edit-item/:id', (req, res, next)=>{
+router.get('/edit-item/:id', (req, res, next) => {
 
   let id = req.params.id;
 
   Liquor.findById(id).populate('vendor')
-  .then(liquor =>{
-    // console.log('Liquor in delete===>', liquor)
-  Vendors.find()
-  .then(allVendors => {
-    // const data = {
-    //   liquor: liquor,
-    //   vendor: allVendors
-    // }  
-    // console.log("=lsdfsdfs======",data);
-    allVendors.forEach(eachVendor => {
-      if (eachVendor._id.equals(liquor.vendor)) {
-        eachVendor.isTheVendor = true;
-      }
+    .then(liquor => {
+      Vendors.find()
+        .then(allVendors => {
+          allVendors.forEach(eachVendor => {
+            if (eachVendor._id.equals(liquor.vendor)) {
+              eachVendor.isTheVendor = true;
+            }
+          })
+
+          res.render('liquor/edit', {
+            liquor: liquor,
+            vendors: allVendors
+          });
+        })
     })
-    
-    res.render('liquor/edit', {liquor: liquor, vendors: allVendors});
-   })
-  })
-  .catch(err=>{
+    .catch(err => {
       next(err)
-  })
+    })
 
 });
 
-router.post('/update-item/:id', (req, res, next)=>{
+router.post('/update-item/:id', (req, res, next) => {
 
   let id = req.params.id;
 
@@ -144,76 +125,35 @@ router.post('/update-item/:id', (req, res, next)=>{
       description: req.body.description,
       size: req.body.size,
       vendor: req.body.vendor
-  })
-  .then(result=>{
-      res.redirect('/liquor/show/'+id)
-  })
-  .catch((err)=>{
+    })
+    .then(result => {
+      res.redirect('/liquor/show/' + id)
+    })
+    .catch((err) => {
       next(err);
-  })
+    })
 
 });
 
-router.get('/findbybarcode/:barcode', (req, res, next)=>{
+router.get('/findbybarcode/:barcode', (req, res, next) => {
   console.log(req.params.barcode)
-  Liquor.find({barcode: req.params.barcode})
-  .then(foundLiquor => {
-    console.log(foundLiquor)
-    res.send(foundLiquor)
-  })
+  Liquor.find({
+      barcode: req.params.barcode
+    })
+    .then(foundLiquor => {
+      console.log(foundLiquor)
+      res.send(foundLiquor)
+    })
 })
 
 module.exports = router;
 
 
- // Liquor.find()
-  // .populate("vendor")
-  // .then(allLiquor=>{
-  //     console.log("in index ---> All the liquor",allLiquor);
-      
-  //     res.render('liquor/index', {liquor: allLiquor})
-  // })
-  // .catch(err =>{
-  //     next(err);
-  // })
 
-// });
-
-
-
-
-
-// console.log("=====DFGNFJDGDFJGDSFG", req.user)
-  // console.log(req.session)
-  // if(!req.user){
-    //     req.flash('error', "please login to view book selection")
-    //     res.redirect('/login');
-    // }
-
-        // if(req.session.counter){
-        //     req.session.counter++;
-        // }else{
-        //     req.session.counter = 1;
-        // }
-        // this is a useless example of how oyu can edit the session whenever/however you want
-
-        // Vendors.find()
-        // .then((allVendors)=>{
-    
-        // Liquor.find()
-        // .then((allLiquor)=>{
-    
-    
-    
-    
-            // allLiquor.forEach((eachItem)=>{
-    
-            //     if(req.user){
-       
-            //         if(eachItem.vendor.equals(req.vendor._id) || req.user.role.equals("Vendor")){
-            //             eachItem.mine = true;
-            //             // now we are attaching a .mine key to all the books who have a creator equal to currently logged in user's ID
-            //             // and also, if currently logged in user isAdmin, were attaching it to all of them
-            //         }
-            //     }
-            // })
+// router.get('/findbybarcode/:barcode', (req, res, next)=>{
+//   console.log(req.params.barcode)
+//   Liquor.find({barcode: req.params.barcode})
+//   .then(foundLiquor => {
+//     res.render('barcode', {foundLiquor})
+//   })
+// })

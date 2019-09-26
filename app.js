@@ -103,9 +103,9 @@ passport.use(new LocalStrategy((username, password, next) => {
 
 
 app.use((req, res, next)=>{
-  
   app.locals.currentUser = req.user;
-  res.locals.admin = req.admin; 
+  console.log(req.user)
+  app.locals.admin = req.admin;
   res.locals.employee = req.employee;
   res.locals.vendors = req.vendors;
   res.locals.sucessMessage = req.flash('success');

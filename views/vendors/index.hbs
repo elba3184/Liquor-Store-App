@@ -3,9 +3,13 @@
 {{#each vendors}}
   <li>{{companyName}}</li>
   <li>{{location}}</li>
-  <li>{{products}}</li>
+  {{#each products}}
+    {{!-- <li>{{products}}</li> --}}
+    <li>{{brand}}</li>
+    <li>{{brand}}</li>
+  {{/each}}
   {{!-- {{#each products}}
-  <li>{{products.brand}}</li>
+ 
 {{/each}} --}}
 
   <a href="show/{{_id}}">Read more about this vendor</a>

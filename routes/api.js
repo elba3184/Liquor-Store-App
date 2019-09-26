@@ -12,12 +12,21 @@ app.post('/api/user', function(req, res) {
     });
 });
 
-app.post('/api/vendor', function(req, res) {
-    Vendor.create({
-      companyName: req.body.companyName,
-      location: req.body.location,
-      products: req.body.products,
-    }).then(vendor => {
-      res.json(vendor)
-    });
-});
+  // let isAdmin = false;
+  // let isVendor = false;
+  // let isEmployee = false;
+
+  // if (req.user.role == 'Administrator') {
+  //   console.log("This user is an admin")
+  //   isAdmin = true;
+  //   console.log(isAdmin)
+  // } else if (req.user.role == 'Vendor') {
+  //   console.log("This user is a vendor")
+  //   isVendor = true;
+  //   console.log(isVendor)
+  // } else if (req.user.role == 'Employee') {
+  //   console.log("This user is an employee")
+  //   isEmployee = true;
+  //   console.log(isEmployee)
+  // }
+  // {isAdmin, isEmployee, isVendor}
