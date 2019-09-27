@@ -12,25 +12,6 @@ router.get('/signup', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
 
-  // let isAdmin = false;
-  // let isEmployee = false;
-  // let isVendor = false;
-  // if (req.user) {
-
-  //   if (req.user.isAdmin) {
-  //     if (req.body.role === "Adminstrator") {
-  //       isAdmin = true;
-  //     } else if (req.body.role === "Employee") {
-  //       isEmployee = true;
-  //     } else if (req.body.role === "Vendor") {
-  //       isVendor = true;
-  //     }
-  //   }
-
-  // }
-
-  console.log(isAdmin, isEmployee, isVendor)
-
   let username = req.body.username;
   let password = req.body.password;
   let role = req.body.role;

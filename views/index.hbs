@@ -1,15 +1,11 @@
+<div class="index-content">
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h3>Welcome to Marcos' Online Liquor Store</h3>
 
-
-{{#if isAdmin}}
-    This user is an admin
-{{/if}}
-
-{{#if isVendor}}
-    This user is an vendor
-{{/if}}
-
-{{#if isEmployee}}
-    This user is an employee
-{{/if}}
+    <p>To edit, delete and view all vendors, click the button below</p>
+    <div class="index-buttons">
+         <button class="all-vendors"><a href="/vendors/index">Vendors</a></button>
+  <p>To edit, delete and view all liquor, click the button below</p>
+   <button class="all-liquor"><a href="/liquor/index">Inventory</a></button>
+     </div>
+</div>

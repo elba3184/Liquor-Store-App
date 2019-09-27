@@ -1,16 +1,18 @@
-<h2>Welcome to the Vendor Index</h2>
+<div class="vendor-index">
+ 
+<h2>List of Vendors</h2>
+<div class= "vendors-content">
 <ul>
 {{#each vendors}}
-  <li>{{companyName}}</li>
-  <li>{{location}}</li>
+  <h3>{{companyName}}</h3>
+  Location: {{location}}
   {{#each products}}
     {{!-- <li>{{products}}</li> --}}
-    <li>{{brand}}</li>
-    <li>{{brand}}</li>
+    {{brand}}
+    
   {{/each}}
-  {{!-- {{#each products}}
  
-{{/each}} --}}
+ <br>
 
   <a href="show/{{_id}}">Read more about this vendor</a>
 
@@ -25,4 +27,8 @@
 {{/each}}
 </ul>
 
+</div>
+
  <a href="/vendors/new-vendor">Create a new vendor</a>
+
+</div>

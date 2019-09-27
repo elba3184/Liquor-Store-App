@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
   let isVendor = false;
 
   if (!req.user) {
-    res.render('index')
+    res.redirect('/users/login')
   } else if (req.user.role == "Administrator") {
       isAdmin = true;
     } else if (req.user.role == "Employee") {
@@ -21,13 +21,6 @@ router.get('/', (req, res, next) => {
     } else if (req.user.role == "Vendor") {
       isVendor = true;
     }
-  
-
-  
-
-  // console.log(isAdmin)
-
-
 
   res.render('index', {isAdmin, isEmployee, isVendor});
 

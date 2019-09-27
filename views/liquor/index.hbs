@@ -7,15 +7,14 @@
   <li>{{size}}</li>
   <li>{{vendor.companyName}}</li>
 
-  <a href="show/{{barcode}}">Read more about this item</a>
-
+<a href="show/{{_id}}">Read more about this item</a>
 
 <form action="delete-item/{{_id}}" method="POST">
     <button>Delete this item</button>
 </form>
 
 <a href="edit-item/{{_id}}">Edit This item's Info</a>
-  <br>
+<br>
  <a href="/liquor/new-item">Create a new item</a>
 {{/each}}
 </ul>

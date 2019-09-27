@@ -23,13 +23,15 @@ router.get('/index', (req, res, next) => {
 //Populate vendors
 router.get('/show/:id', (req, res, next) => {
 
-  let id = req.params._id;
-  Liquor.find(id).populate('vendor')
+  let id = req.params.id;
+  console.log(id)
+  Liquor.findById(id).populate('vendor')
     .then(item => {
-      console.log(item)
+      
       res.render('liquor/show', {
         liquor: item
       })
+    
     })
     .catch((err) => {
       next(err);
